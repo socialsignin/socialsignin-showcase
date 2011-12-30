@@ -32,7 +32,7 @@ public class SocialSignInShowcaseController {
 	}
 
 	@RequestMapping("/")
-	public String helloProtectedWorld(Map model) {
+	public String helloPublicWorld(Map model) {
 		model.put("userName", getAuthenticatedUserName());
 
 		// Display on the jsp which security level the page is intended for
@@ -42,7 +42,7 @@ public class SocialSignInShowcaseController {
 	}
 
 	@RequestMapping("/protected")
-	public String helloWorld(Map model) {
+	public String helloProtectedWorld(Map model) {
 		model.put("userName", getAuthenticatedUserName());
 
 		// Display on the jsp which security level the page is intended for
