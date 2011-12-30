@@ -10,6 +10,11 @@
 	<properties>
 		<org.socialsignin.facebook.version>1.0.1-SNAPSHOT</org.socialsignin.facebook.version>
 		<org.socialsignin.twitter.version>1.0.1-SNAPSHOT</org.socialsignin.twitter.version>
+				<org.socialsignin.lastfm.version>1.0.1-SNAPSHOT</org.socialsignin.lastfm.version>
+						<org.socialsignin.mixcloud.version>1.0.1-SNAPSHOT</org.socialsignin.mixcloud.version>
+								<org.socialsignin.soundcloud.version>1.0.1-SNAPSHOT</org.socialsignin.soundcloud.version>
+										<org.socialsignin.linkedin.version>1.0.1-SNAPSHOT</org.socialsignin.linkedin.version>
+		
 		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>
 		<org.springframework.social.version>1.0.1.RELEASE</org.springframework.social.version>
 		<org.springframework.security.version>3.1.0.RELEASE</org.springframework.security.version>
@@ -31,10 +36,30 @@
 			<artifactId>socialsignin-facebook</artifactId>
 			<version>${org.socialsignin.facebook.version}</version>
 		</dependency>
+			<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-linkedin</artifactId>
+			<version>${org.socialsignin.linkedin.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-twitter</artifactId>
 			<version>${org.socialsignin.twitter.version}</version>
+		</dependency>
+			<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-lastfm</artifactId>
+			<version>${org.socialsignin.lastfm.version}</version>
+		</dependency>
+			<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-mixcloud</artifactId>
+			<version>${org.socialsignin.mixcloud.version}</version>
+		</dependency>
+				<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-soundcloud</artifactId>
+			<version>${org.socialsignin.soundcloud.version}</version>
 		</dependency>
 			<dependency>
 			<groupId>org.springframework.social</groupId>

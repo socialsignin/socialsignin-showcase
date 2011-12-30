@@ -34,7 +34,18 @@ Public Area.
                       <authz:authorize access="hasRole('ROLE_USER_FACEBOOK')">
 						<p>You are connected with Facebook. </p>
                     </authz:authorize>
-
+       <authz:authorize access="hasRole('ROLE_USER_LASTFM')">
+						<p>You are connected with LastFm. </p>
+                    </authz:authorize>
+                           <authz:authorize access="hasRole('ROLE_USER_MIXCLOUD')">
+						<p>You are connected with Mixcloud. </p>
+                    </authz:authorize>
+                     <authz:authorize access="hasRole('ROLE_USER_SOUNDCLOUD')">
+						<p>You are connected with SoundCloud. </p>
+                    </authz:authorize>
+                     <authz:authorize access="hasRole('ROLE_USER_LINKEDIN')">
+						<p>You are connected with LinkedIn. </p>
+                    </authz:authorize>
            
                     <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_FACEBOOK')">
 						<p><a href="/oauthconnect.jsp">Connect</a> your account with Facebook</p>
@@ -42,6 +53,21 @@ Public Area.
                     <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_TWITTER')">
 						<p><a href="/oauthconnect.jsp">Connect</a> your account with Twitter</p>
                     </authz:authorize>
+                               <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_LASTFM')">
+						<p><a href="/oauthconnect.jsp">Connect</a> your account with LastFm</p>
+                    </authz:authorize>
+                                   <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_MIXCLOUD')">
+						<p><a href="/oauthconnect.jsp">Connect</a> your account with Mixcloud</p>
+                    </authz:authorize>
+                                   <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_SOUNDCLOUD')">
+						<p><a href="/oauthconnect.jsp">Connect</a> your account with Soundcloud</p>
+                    </authz:authorize>
+                            <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_LINKEDIN')">
+						<p><a href="/oauthconnect.jsp">Connect</a> your account with LinkedIn</p>
+                    </authz:authorize>
+                       
+                       
+                       
                        
                  
 </body>                    
