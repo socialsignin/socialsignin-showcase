@@ -62,12 +62,19 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	
+	
+	<bean id="customSpringSocialSecurityEntryPoint"
+  class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+ <property name="loginFormUrl" value="/login"/>
+</bean>
+	
 
 	<security:http use-expressions="true"
-		entry-point-ref="springSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
+		entry-point-ref="customSpringSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
 
 		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/oauthconnect.jsp" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/connectWithProvider" access="hasRole('ROLE_USER')" />
 
 
 		<access-denied-handler ref="springSocialSecurityAccessDeniedHandler" />

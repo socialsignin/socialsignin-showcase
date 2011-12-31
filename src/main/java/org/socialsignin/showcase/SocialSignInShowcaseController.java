@@ -15,20 +15,53 @@
  */
 package org.socialsignin.showcase;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SocialSignInShowcaseController {
 
+	@Autowired
+	private ConnectionFactoryRegistry connectionFactoryRegistry;
+
 	private String getAuthenticatedUserName() {
 		Authentication authentication = SecurityContextHolder.getContext()
 				.getAuthentication();
 		return authentication == null ? null : authentication.getName();
+	}
+
+	private Map<String, String> getRegisteredProviderRoleNamesByProviderName() {
+		Map<String, String> registeredProviderRoleNamesByProviderName = new HashMap<String, String>();
+		for (String registeredProviderId : connectionFactoryRegistry
+				.registeredProviderIds()) {
+			registeredProviderRoleNamesByProviderName.put(registeredProviderId,
+					"ROLE_USER_" + registeredProviderId.toUpperCase());
+		}
+		return registeredProviderRoleNamesByProviderName;
+
+	}
+
+	@RequestMapping("/login")
+	public String login(Map model) {
+
+		model.put("registeredProviderRoleNamesByProviderName",
+				getRegisteredProviderRoleNamesByProviderName());
+		return "oauthlogin";
+	}
+
+	@RequestMapping("/connectWithProvider")
+	public String connect(Map model) {
+
+		model.put("registeredProviderRoleNamesByProviderName",
+				getRegisteredProviderRoleNamesByProviderName());
+		return "oauthconnect";
 	}
 
 	@RequestMapping("/")
@@ -37,6 +70,9 @@ public class SocialSignInShowcaseController {
 
 		// Display on the jsp which security level the page is intended for
 		model.put("securityLevel", "Public");
+
+		model.put("registeredProviderRoleNamesByProviderName",
+				getRegisteredProviderRoleNamesByProviderName());
 
 		return "helloWorld";
 	}
@@ -48,9 +84,10 @@ public class SocialSignInShowcaseController {
 		// Display on the jsp which security level the page is intended for
 		model.put("securityLevel", "Protected");
 
+		model.put("registeredProviderRoleNamesByProviderName",
+				getRegisteredProviderRoleNamesByProviderName());
+
 		return "helloWorld";
 	}
-	
-	
 
 }
