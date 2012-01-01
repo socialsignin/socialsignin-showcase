@@ -33,10 +33,21 @@ Public Area.
 
 
 	<authz:authorize access="hasRole('${entry.value}')">
-		<p>You are connected with <c:out value="${entry.key}" />.</p>
+		<p>You are connected with <c:out value="${entry.key}" /></p>
 	</authz:authorize>
 
 </c:forEach>
+
+<c:if test="${not empty profileUrls}">
+
+<p>Your profile urls:</p>
+
+<c:forEach var="profileUrl"
+	items="${profileUrls}">
+		<p><c:out value="${profileUrl}" /></p>
+</c:forEach>
+
+</c:if>
 
 <c:forEach var="entry"
 	items="${registeredProviderRoleNamesByProviderName}">

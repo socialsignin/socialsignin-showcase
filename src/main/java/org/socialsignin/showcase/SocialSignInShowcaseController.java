@@ -15,13 +15,27 @@
  */
 package org.socialsignin.showcase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.socialsignin.provider.facebook.FacebookProviderService;
+import org.socialsignin.provider.lastfm.LastFmProviderService;
+import org.socialsignin.provider.linkedin.LinkedInProviderService;
+import org.socialsignin.provider.mixcloud.MixcloudProviderService;
+import org.socialsignin.provider.soundcloud.SoundCloudProviderService;
+import org.socialsignin.provider.twitter.TwitterProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.lastfm.api.LastFm;
+import org.springframework.social.linkedin.api.LinkedIn;
+import org.springframework.social.mixcloud.api.Mixcloud;
+import org.springframework.social.soundcloud.api.SoundCloud;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,6 +44,24 @@ public class SocialSignInShowcaseController {
 
 	@Autowired
 	private ConnectionFactoryRegistry connectionFactoryRegistry;
+	
+	@Autowired
+	private LastFmProviderService lastFmProviderService;
+	
+	@Autowired
+	private FacebookProviderService facebookProviderService;
+	
+	@Autowired
+	private TwitterProviderService twitterProviderService;
+	
+	@Autowired
+	private MixcloudProviderService mixcloudProviderService;
+	
+	@Autowired
+	private SoundCloudProviderService soundCloudProviderService;
+	
+	@Autowired
+	private LinkedInProviderService linkedInProviderService;
 
 	private String getAuthenticatedUserName() {
 		Authentication authentication = SecurityContextHolder.getContext()
@@ -83,7 +115,48 @@ public class SocialSignInShowcaseController {
 
 		// Display on the jsp which security level the page is intended for
 		model.put("securityLevel", "Protected");
-
+		
+		List<String> profileUrls = new ArrayList<String>();
+		
+		LastFm lastFm = lastFmProviderService.getAuthenticatedApi();
+		if (lastFm != null)
+		{
+			profileUrls.add(lastFm.userOperations().getUserProfile().getUrl());
+		}
+		
+		Facebook facebook = facebookProviderService.getAuthenticatedApi();
+		if (facebook != null)
+		{
+			profileUrls.add(facebook.userOperations().getUserProfile().getLink());	
+		}
+		
+		Twitter twitter = twitterProviderService.getAuthenticatedApi();
+		if (twitter != null)
+		{
+			profileUrls.add(twitter.userOperations().getUserProfile().getProfileUrl());
+		}
+		
+		Mixcloud mixcloud = mixcloudProviderService.getAuthenticatedApi();
+		if (mixcloud != null)
+		{
+			profileUrls.add(mixcloud.meOperations().getUserProfile().getUrl());
+		}
+		
+		SoundCloud soundCloud = soundCloudProviderService.getAuthenticatedApi();
+		if (soundCloud != null)
+		{
+			profileUrls.add(soundCloud.meOperations().getUserProfile().getPermalinkUrl());
+		}
+		
+		LinkedIn linkedIn = linkedInProviderService.getAuthenticatedApi();
+		if (linkedIn != null)
+		{
+			profileUrls.add(linkedIn.profileOperations().getProfileUrl());
+		}
+			
+		model.put("profileUrls",
+				profileUrls);
+		
 		model.put("registeredProviderRoleNamesByProviderName",
 				getRegisteredProviderRoleNamesByProviderName());
 
