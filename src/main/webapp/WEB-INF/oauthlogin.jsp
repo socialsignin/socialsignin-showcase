@@ -1,7 +1,8 @@
- <html>
- <head>
- </head>
- <body>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
+
+<tiles:useAttribute name="registeredProviderRoleNamesByProviderName"/>
+
 
 
 <%@ taglib prefix="authz" uri="http://www.springframework.org/security/tags" %>
@@ -31,5 +32,3 @@
 	You are already logged in
  
  </authz:authorize>
- </body>
- </html>

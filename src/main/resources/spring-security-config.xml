@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security"
+
+
+	xsi:schemaLocation="  http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd        
+                http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<!-- Start Spring Security -->
+
+	<!-- proxy-target-class is needed for secured annotations to be honoured -->
+	<security:global-method-security
+		proxy-target-class="true" secured-annotations="enabled"
+		pre-post-annotations="enabled">
+	</security:global-method-security>
+
+
+	<security:authentication-manager alias="authenticationManager">
+	</security:authentication-manager>
+
+
+	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased"
+		xmlns="http://www.springframework.org/schema/beans">
+		<constructor-arg>
+			<list>
+				<bean class="org.springframework.security.access.vote.RoleVoter" />
+				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</list>
+		</constructor-arg>
+	</bean>
+	
+		<bean id="customSpringSocialSecurityEntryPoint"
+  class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+ <property name="loginFormUrl" value="/login"/>
+</bean>
+	
+
+	<security:http use-expressions="true"
+		entry-point-ref="customSpringSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
+
+		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/connectWithProvider" access="hasRole('ROLE_USER')" />
+
+
+		<access-denied-handler ref="springSocialSecurityAccessDeniedHandler" />
+		<security:logout logout-url="/logout" />
+
+		<anonymous />
+		<security:custom-filter position="FORM_LOGIN_FILTER"
+			ref="springSocialSecurityAuthenticationFilter" />
+
+		<remember-me services-ref="springSocialSecurityRememberMeServices"
+			key="springSocialSecurity" />
+
+
+	</security:http>
+
+
+	<bean id="springSocialSecurityRememberMeServices"
+		class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+		<property name="userDetailsService" ref="springSocialSecurityUserDetailsService" />
+		<property name="key" value="springSocialSecurity" />
+		<property name="alwaysRemember" value="true" />
+		<property name="tokenValiditySeconds" value="3600" />
+	</bean>
+
+
+	<!-- End Spring Security -->
+
+
+</beans>
