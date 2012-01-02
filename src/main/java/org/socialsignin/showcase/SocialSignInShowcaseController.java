@@ -26,6 +26,7 @@ import org.socialsignin.provider.linkedin.LinkedInProviderService;
 import org.socialsignin.provider.mixcloud.MixcloudProviderService;
 import org.socialsignin.provider.soundcloud.SoundCloudProviderService;
 import org.socialsignin.provider.twitter.TwitterProviderService;
+import org.socialsignin.springframework.social.security.signin.NonUniqueConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -63,59 +64,27 @@ public class SocialSignInShowcaseController {
 	@Autowired
 	private LinkedInProviderService linkedInProviderService;
 
-	private String getAuthenticatedUserName() {
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
-		return authentication == null ? null : authentication.getName();
-	}
-
-	private Map<String, String> getRegisteredProviderRoleNamesByProviderName() {
-		Map<String, String> registeredProviderRoleNamesByProviderName = new HashMap<String, String>();
-		for (String registeredProviderId : connectionFactoryRegistry
-				.registeredProviderIds()) {
-			registeredProviderRoleNamesByProviderName.put(registeredProviderId,
-					"ROLE_USER_" + registeredProviderId.toUpperCase());
-		}
-		return registeredProviderRoleNamesByProviderName;
-
-	}
 
 	@RequestMapping("/login")
 	public String login(Map model) {
-
-		model.put("registeredProviderRoleNamesByProviderName",
-				getRegisteredProviderRoleNamesByProviderName());
 		return "oauthlogin";
 	}
 
 	@RequestMapping("/connectWithProvider")
 	public String connect(Map model) {
 
-		model.put("registeredProviderRoleNamesByProviderName",
-				getRegisteredProviderRoleNamesByProviderName());
 		return "oauthconnect";
 	}
 
 	@RequestMapping("/")
 	public String helloPublicWorld(Map model) {
-		model.put("userName", getAuthenticatedUserName());
 
-		// Display on the jsp which security level the page is intended for
-		model.put("securityLevel", "Public");
-
-		model.put("registeredProviderRoleNamesByProviderName",
-				getRegisteredProviderRoleNamesByProviderName());
-
-		return "helloWorld";
+		return "publicPage";
 	}
 
 	@RequestMapping("/protected")
 	public String helloProtectedWorld(Map model) {
-		model.put("userName", getAuthenticatedUserName());
 
-		// Display on the jsp which security level the page is intended for
-		model.put("securityLevel", "Protected");
-		
 		List<String> profileUrls = new ArrayList<String>();
 		
 		LastFm lastFm = lastFmProviderService.getAuthenticatedApi();
@@ -156,11 +125,8 @@ public class SocialSignInShowcaseController {
 			
 		model.put("profileUrls",
 				profileUrls);
-		
-		model.put("registeredProviderRoleNamesByProviderName",
-				getRegisteredProviderRoleNamesByProviderName());
-
-		return "helloWorld";
+	
+		return "protectedPage";
 	}
 
 }

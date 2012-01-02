@@ -19,6 +19,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -30,12 +31,30 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
 
 @Configuration
 public class SocialSignInShowcaseWebappConfig {
 
+	
+	@Bean
+	public HandlerExceptionResolver defaultHandlerExceptionResolver()
+	{
+		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+		Properties mappings = new Properties();
+		mappings.put("org.socialsignin.springframework.social.security.signin.NonUniqueConnectionException", "connect/providerConnect");
+
+		resolver.setDefaultErrorView("exception");
+		
+		resolver.setExceptionMappings(mappings);
+		return resolver;
+	}
+	
+	
+	
 	@Autowired
 	private DataSource dataSource;
 

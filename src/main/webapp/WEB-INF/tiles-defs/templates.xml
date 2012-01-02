@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".mainTemplate" template="/WEB-INF/template.jsp"
+		preparer="authenticationDetailViewPreparer">
+		<put-attribute name="title" value="" type="string" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<definition name=".mainTemplateWithHeader" template="/WEB-INF/template.jsp"
+		preparer="authenticationDetailViewPreparer">
+		<put-attribute name="title" value="" type="string" />
+		<put-attribute name="header" value="/WEB-INF/header.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+
+	<definition name="exception.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/exception.jsp" />
+	</definition>
+
+	<definition name="publicPage.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="securityLevel" value="Public" type="string"
+			cascade="true" />
+		<put-attribute name="body" value="/WEB-INF/helloWorld.jsp" />
+	</definition>
+
+	<definition name="protectedPage.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="securityLevel" value="Protected"
+			type="string" cascade="true" />
+		<put-attribute name="body" value="/WEB-INF/helloWorld.jsp" />
+	</definition>
+	<definition name="oauthlogin.layout" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/oauthlogin.jsp" />
+	</definition>
+	<definition name="oauthconnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/oauthconnect.jsp" />
+	</definition>
+	<definition name="signUpForm.layout" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/signUpForm.jsp" />
+	</definition>
+
+
+	<definition name="connect/providerConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
+
+	<definition name="connect/twitterConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="Twitter" type="string"
+			cascade="true" />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+	<definition name="connect/twitterConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
+
+	<definition name="connect/facebookConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="Facebook"
+			type="string" cascade="true " />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+	<definition name="connect/facebookConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
+
+	<definition name="connect/lastfmConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="LastFm" type="string"
+			cascade="true " />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+	<definition name="connect/lastfmConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
+
+	<definition name="connect/soundcloudConnected.layout"
+		extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="SoundCloud"
+			type="string" cascade="true " />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+	<definition name="connect/soundcloudConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
+
+
+	<definition name="connect/mixcloudConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="MixCloud"
+			type="string" cascade="true " />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+	<definition name="connect/mixcloudConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
+
+
+	<definition name="connect/linkedinConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="LinkedIn"
+			type="string" cascade="true " />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+
+	<definition name="connect/linkedinConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
+
+
+</tiles-definitions>

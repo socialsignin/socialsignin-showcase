@@ -1,10 +1,9 @@
 <%@ taglib prefix="authz" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
- <html>
- <head>
- </head>
- <body>
+ <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
+<tiles:useAttribute name="registeredProviderRoleNamesByProviderName"/>
+
    <p>
 
 
@@ -24,8 +23,4 @@
 
 
 </c:forEach>
-
-
-</body>
-</html>
 
