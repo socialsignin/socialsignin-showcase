@@ -22,19 +22,14 @@
 	<bean id="connectionFactoryRegistry" class="org.springframework.social.connect.support.ConnectionFactoryRegistry" />
 
 	<bean class="org.springframework.social.connect.web.ProviderSignInController">
-		<constructor-arg value="${application.secureUrl}" />
+				<!-- relies on by-type autowiring for constructor-args -->
 		<property name="signUpUrl" value="/signup" />
-		<property name="applicationUrl" value="${application.secureUrl}" />
 		<property name="postSignInUrl" value="/authenticate" />
-
-
-		<!-- relies on by-type autowiring for the other constructor-args -->
+		<!-- relies on by-type autowiring for constructor-args -->
 	</bean>
 
 	<bean class="org.springframework.social.connect.web.ConnectController">
-		<!-- relies on by-type autowiring for the constructor-args -->
-		<property name="applicationUrl" value="${application.secureUrl}" />
-
+		<!-- relies on by-type autowiring for constructor-args -->
 		<property name="interceptors" ref="connectInterceptorList">
 		</property>
 	</bean>
