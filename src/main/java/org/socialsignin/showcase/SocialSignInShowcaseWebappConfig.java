@@ -30,6 +30,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
@@ -54,37 +56,14 @@ public class SocialSignInShowcaseWebappConfig {
 	}
 	
 	
-	
-	@Autowired
-	private DataSource dataSource;
 
-	/**
-	 * Used to configure the in-memory HSQLDB database Remove this method if
-	 * different datasource is used
-	 * 
-	 * @throws IOException
-	 */
-	@PostConstruct
-	public void createDatabaseTable() throws IOException {
-		Resource resource = new ClassPathResource(
-				"org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql");
-		BufferedInputStream is = new BufferedInputStream(
-				resource.getInputStream());
-		final char[] buffer = new char[0x10000];
-		StringBuilder out = new StringBuilder();
-		Reader in = new InputStreamReader(resource.getInputStream(), "UTF-8");
-		int read;
-		do {
-			read = in.read(buffer, 0, buffer.length);
-			if (read > 0) {
-				out.append(buffer, 0, read);
-			}
-		} while (read >= 0);
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		jdbcTemplate.execute(out.toString());
-
-	}
+	@Bean
+    public DataSource dataSource() {
+        return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.HSQL)
+            .addScript("classpath:org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql")
+            .build();
+    }
 
 	
 	@Bean
