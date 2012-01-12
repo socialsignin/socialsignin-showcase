@@ -18,7 +18,8 @@
 
 	<!-- Start Spring Security -->
 
-	<!-- proxy-target-class is needed for secured annotations to be honoured -->
+	<!-- proxy target class needs to be false to switch of cglib proxies, as they cannot be used
+	with request scoped ConnectionRepository.  Unfortunately proxy-target-class=true is needed for secured annotations to be honoured -->
 	<security:global-method-security proxy-target-class="false" >
 	</security:global-method-security>
 
