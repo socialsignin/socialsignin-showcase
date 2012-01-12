@@ -24,7 +24,7 @@
 
 	<bean id="connectionFactoryRegistry" class="org.springframework.social.connect.support.ConnectionFactoryRegistry" />
 
-	 <tx:annotation-driven transaction-manager="transactionManager" /> 
+	 <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/> 
 	  
 	   
  	<!-- Transaction manager for a single JDBC DataSource -->
@@ -76,7 +76,7 @@
 		id="connectionRepository" factory-method="createConnectionRepository"
 		factory-bean="usersConnectionRepository" scope="request">
 		<constructor-arg value="#{request.userPrincipal.name}" />
-		<aop:scoped-proxy proxy-target-class="true" />
+		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 
 
