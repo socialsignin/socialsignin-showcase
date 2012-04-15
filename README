@@ -29,13 +29,8 @@ Once you have cloned this project, you'll need to obtain client API accounts for
 providers and ensure that the client ids and secrets are set in the environment.properties file.  
 
 You will also need to configure the return urls set on each provider account to be http://localhost:8080/ 
-(depending on the provider).  The exception to this is for Tumblr:
-
-If you wish users to be able to both login with tumblr or to connect with tumblr after having logged in with 
-another provider, the return url will need to be set to http://localhost:8080/signinOrConnect/tumblr. 
-
-To only support login with tumblr, the return url will need to be http://localhost:8080/signin/tumblr
-To only support connect with tumblr (when already logged in), the return url will need to be http://localhost:8080/connect/tumblr
+(depending on the provider).  The exception to this is for Tumblr where the return url will need to be set to 
+http://localhost:8080/signinOrConnect/tumblr
 
 You can then start your project webapp using jetty:
 
