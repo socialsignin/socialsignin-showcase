@@ -5,7 +5,8 @@ https://github.com/socialsignin/mvn-archetype-socialsignin-webapp
 This webapp delegates login for the application to 3rd party providers using spring-social-security
 , removing the need for local username/passwords.   
 
-Supported providers are facebook,twitter,lastfm,mixcloud,soundcloud and linkedin.
+Supported providers are facebook,twitter,lastfm,mixcloud,soundcloud,linkedin and tumblr (thanks to Sam Douglass 
+for providing spring-social-tumblr module and helping us to showcase it here )
 
 A demo controller is included to demonstrate how simple it is to access the API of the 3rd party provider
 once the user is logged in using the SocialSignin provider modules.
