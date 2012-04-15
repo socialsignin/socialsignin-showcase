@@ -25,6 +25,7 @@ import org.socialsignin.provider.lastfm.LastFmProviderService;
 import org.socialsignin.provider.linkedin.LinkedInProviderService;
 import org.socialsignin.provider.mixcloud.MixcloudProviderService;
 import org.socialsignin.provider.soundcloud.SoundCloudProviderService;
+import org.socialsignin.provider.tumblr.TumblrProviderService;
 import org.socialsignin.provider.twitter.TwitterProviderService;
 import org.socialsignin.springframework.social.security.signin.NonUniqueConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ import org.springframework.social.lastfm.api.LastFm;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.mixcloud.api.Mixcloud;
 import org.springframework.social.soundcloud.api.SoundCloud;
+import org.springframework.social.tumblr.api.Tumblr;
+import org.springframework.social.tumblr.api.UserInfoBlog;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +66,9 @@ public class SocialSignInShowcaseController {
 	
 	@Autowired
 	private LinkedInProviderService linkedInProviderService;
+	
+	@Autowired
+	private TumblrProviderService tumblrProviderService;
 
 
 	@RequestMapping("/login")
@@ -121,6 +127,16 @@ public class SocialSignInShowcaseController {
 		if (linkedIn != null)
 		{
 			profileUrls.add(linkedIn.profileOperations().getProfileUrl());
+		}
+		
+		Tumblr tumblr = tumblrProviderService.getAuthenticatedApi();
+		if (tumblr != null)
+		{
+			List<UserInfoBlog> blogs = tumblr.userOperations().info().getBlogs();
+			if (blogs != null && blogs.size() >0)
+			{
+				profileUrls.add(blogs.get(0).getUrl());
+			}
 		}
 			
 		model.put("profileUrls",

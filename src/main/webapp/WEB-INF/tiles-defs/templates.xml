@@ -58,6 +58,15 @@
 	<definition name="connect/twitterConnect.layout" extends=".mainTemplateWithHeader">
 		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
 	</definition>
+	
+		<definition name="connect/tumblrConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="Tumblr" type="string"
+			cascade="true" />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+	<definition name="connect/tumblrConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/providerConnect.jsp" />
+	</definition>
 
 	<definition name="connect/facebookConnected.layout" extends=".mainTemplateWithHeader">
 		<put-attribute name="providerName" value="Facebook"
