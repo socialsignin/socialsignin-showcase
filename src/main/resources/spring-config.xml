@@ -35,7 +35,7 @@
 		<!-- Scan classpath for components, including our Social Security Configuration 
 			class -->
 		<context:component-scan
-			base-package="org.socialsignin.springframework.social.security" />
+			base-package="org.socialsignin.springsocial.security" />
 		
 	
 	<!-- End Spring Social Security -->

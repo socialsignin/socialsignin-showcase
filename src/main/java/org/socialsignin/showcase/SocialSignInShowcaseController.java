@@ -16,7 +16,6 @@
 package org.socialsignin.showcase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +26,7 @@ import org.socialsignin.provider.mixcloud.MixcloudProviderService;
 import org.socialsignin.provider.soundcloud.SoundCloudProviderService;
 import org.socialsignin.provider.tumblr.TumblrProviderService;
 import org.socialsignin.provider.twitter.TwitterProviderService;
-import org.socialsignin.springframework.social.security.signin.NonUniqueConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.lastfm.api.LastFm;
 import org.springframework.social.linkedin.api.LinkedIn;
@@ -45,9 +40,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SocialSignInShowcaseController {
-
-	@Autowired
-	private ConnectionFactoryRegistry connectionFactoryRegistry;
 	
 	@Autowired
 	private LastFmProviderService lastFmProviderService;
@@ -67,10 +59,6 @@ public class SocialSignInShowcaseController {
 	@Autowired
 	private LinkedInProviderService linkedInProviderService;
 	
-	@Autowired
-	private TumblrProviderService tumblrProviderService;
-
-
 	@RequestMapping("/login")
 	public String login(Map model) {
 		return "oauthlogin";
@@ -87,7 +75,8 @@ public class SocialSignInShowcaseController {
 
 		return "publicPage";
 	}
-
+	
+	
 	@RequestMapping("/protected")
 	public String helloProtectedWorld(Map model) {
 
@@ -127,16 +116,6 @@ public class SocialSignInShowcaseController {
 		if (linkedIn != null)
 		{
 			profileUrls.add(linkedIn.profileOperations().getProfileUrl());
-		}
-		
-		Tumblr tumblr = tumblrProviderService.getAuthenticatedApi();
-		if (tumblr != null)
-		{
-			List<UserInfoBlog> blogs = tumblr.userOperations().info().getBlogs();
-			if (blogs != null && blogs.size() >0)
-			{
-				profileUrls.add(blogs.get(0).getUrl());
-			}
 		}
 			
 		model.put("profileUrls",
