@@ -22,9 +22,9 @@
 	    <org.springframework.webflow.version>2.3.0.RELEASE</org.springframework.webflow.version>
 	</properties>
 	<repositories>
- 		<repository>
+ 		 		<repository>
 	        	<id>opensourceagility-snapshots</id>
-	        	<url>https://github.com/OpenSourceAgility/opensourceagility-mvn-repo/raw/master/snapshots</url>
+	        	<url>http://repo.opensourceagility.com/snapshots</url>
 	    	</repository>
 	</repositories>
 	<dependencies>
