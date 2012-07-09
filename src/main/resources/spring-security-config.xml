@@ -65,13 +65,19 @@
 
 
 	<bean id="springSocialSecurityRememberMeServices"
-		class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+		class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
 		<property name="userDetailsService" ref="springSocialSecurityUserDetailsService" />
+		<property name="tokenRepository" ref="tokenRepository" />
 		<property name="key" value="springSocialSecurity" />
 		<property name="alwaysRemember" value="true" />
 		<property name="tokenValiditySeconds" value="3600" />
 	</bean>
 
+	<bean id="tokenRepository"
+		class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+		<property name="createTableOnStartup" value="true" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<!-- End Spring Security -->
 
