@@ -31,6 +31,7 @@ import org.springframework.social.lastfm.api.LastFm;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.mixcloud.api.Mixcloud;
 import org.springframework.social.soundcloud.api.SoundCloud;
+import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,6 +118,21 @@ public class SocialSignInShowcaseController {
 			
 		model.put("profileUrls",
 				profileUrls);
+	
+		return "protectedPage";
+	}
+	
+	
+	@RequestMapping("/protected/twitter")
+	public String helloProtectedTwitterWorld(Map model) {
+
+		List<String> profileUrls = new ArrayList<String>();
+		
+		Twitter twitter = twitterProviderService.getAuthenticatedApi();
+		profileUrls.add(twitter.userOperations().getUserProfile().getProfileUrl());
+		
+		List<Tweet> tweets = twitter.timelineOperations().getUserTimeline();
+		model.put("tweets", tweets);
 	
 		return "protectedPage";
 	}
