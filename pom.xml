@@ -14,10 +14,10 @@
 		<org.socialsignin.mixcloud.version>1.0.2-SNAPSHOT</org.socialsignin.mixcloud.version>
 		<org.socialsignin.soundcloud.version>1.0.2-SNAPSHOT</org.socialsignin.soundcloud.version>
 		<org.socialsignin.linkedin.version>1.0.2-SNAPSHOT</org.socialsignin.linkedin.version>
-		<org.socialsignin.springsocial.security.version>1.0.2-SNAPSHOT</org.socialsignin.springsocial.security.version>
-		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
+		<org.socialsignin.springsocial.security.version>1.0.2.RELEASE</org.socialsignin.springsocial.security.version>
+		<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
 		<org.springframework.social.version>1.0.2.RELEASE</org.springframework.social.version>
-		<org.springframework.security.version>3.1.0.RELEASE</org.springframework.security.version>
+		<org.springframework.security.version>3.1.2.RELEASE</org.springframework.security.version>
 		<org.apache.tiles.version>2.2.2</org.apache.tiles.version>
 	    <org.springframework.webflow.version>2.3.0.RELEASE</org.springframework.webflow.version>
 	</properties>
@@ -25,6 +25,10 @@
  		 		<repository>
 	        	<id>opensourceagility-snapshots</id>
 	        	<url>http://repo.opensourceagility.com/snapshots</url>
+	    	</repository>
+		<repository>
+	        	<id>opensourceagility-releases</id>
+	        	<url>http://repo.opensourceagility.com/releases</url>
 	    	</repository>
 	</repositories>
 	<dependencies>
