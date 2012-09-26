@@ -14,12 +14,12 @@ once the user is logged in using the SocialSignin provider modules.
 
 This webapp uses:
 
-1) spring-social modules  (Allows connection to 3 party provider APIs)
+1) <a href="https://github.com/SpringSocial/spring-social">Spring Social</a> provider modules  (Allows connection to 3 party provider APIs)
 
-2) spring-social-security ( Removes need for local user account management, delegating to 3rd party for login details - no
+2) <a href="https://github.com/socialsignin/spring-social-security">spring-social-security<a/> ( Removes need for local user account management, delegating to 3rd party for login details - no
 local usernames or passwords are needed. )
 
-3) socialsignin-modules   ( Easy configuration of spring social providers using component scanning )
+3) <a href="https://github.com/socialsignin/socialsignin-provider">socialsignin-provider</a> modules   ( Easy configuration of spring social providers using component scanning )
 
 This app comes with an in-memory datasource configured for development purposes - this can be easily switched for a 
 production datasource.
