@@ -35,7 +35,10 @@
 		<!-- Scan classpath for components, including our Social Security Configuration 
 			class -->
 		<context:component-scan
-			base-package="org.socialsignin.springsocial.security" />
+			base-package="org.socialsignin.springsocial.security" >
+			 <!-- Exclude signup components from Spring Social Security  -->
+  <context:exclude-filter type="regex" expression=".*\.signup\..*"/>
+			</context:component-scan>
 			
 
 	<!-- End Spring Social Security -->

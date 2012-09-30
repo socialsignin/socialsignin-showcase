@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.socialsignin.showcase;
+package org.socialsignin.showcase.conf;
 
 import java.util.Properties;
 

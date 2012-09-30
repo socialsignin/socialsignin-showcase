@@ -1,4 +1,4 @@
-package org.socialsignin.showcase;
+package org.socialsignin.showcase.web;
 
 import java.util.HashMap;
 import java.util.Map;
