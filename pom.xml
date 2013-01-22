@@ -8,6 +8,7 @@
 	<name>socialsignin-showcase</name>
 	<url>http://maven.apache.org</url>
 	<properties>
+		<org.socialsignin.provider.version>1.0.3-SNAPSHOT</org.socialsignin.provider.version>
 		<org.socialsignin.facebook.version>1.0.2-SNAPSHOT</org.socialsignin.facebook.version>
 		<org.socialsignin.twitter.version>1.0.2-SNAPSHOT</org.socialsignin.twitter.version>
 		<org.socialsignin.lastfm.version>1.0.2-SNAPSHOT</org.socialsignin.lastfm.version>
@@ -72,6 +73,11 @@
 			<version>${org.apache.tiles.version}</version>
 		</dependency>
 		<!-- end tiles implementation -->
+			<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-provider</artifactId>
+			<version>${org.socialsignin.provider.version}</version>
+		</dependency>
 			<dependency>
 			<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-facebook</artifactId>
