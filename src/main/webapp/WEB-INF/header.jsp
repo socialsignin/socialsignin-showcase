@@ -9,6 +9,6 @@
 	<p>You are not logged in. &nbsp;<a href="/login" />Login</a></p>
 </authz:authorize>
 <authz:authorize access="hasRole('ROLE_USER')">
-						<p>You are logged in locally as <c:out value="${userName}" />. &nbsp;<a
+						<p>You are logged in to SocialSignin Showcase as <c:out value="${userName}" />. &nbsp;<a
 		href="/logout">Logout</a></p>
 </authz:authorize>

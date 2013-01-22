@@ -11,13 +11,13 @@
  <authz:authorize access="!hasRole('ROLE_USER')">
 
 
-<p>Please log in with a third party provider</p>
-
+<h2>Please log in with any third party provider you have previously connected with SocialSignin Showcase</h2>
+<p>(Or if this is your first login to SocialSignin Showcase, choose any provider to create an account)
 <c:forEach var="entry"
 	items="${registeredProviderRoleNamesByProviderName}">
 
 
-  <form class="login"action="http://localhost:8080/signin/<c:out value="${entry.key}" />" method="POST">
+  <form class="login"action="/signin/<c:out value="${entry.key}" />" method="POST">
 	<p><input type="submit" value="Login with <c:out value="${entry.key}" />" /></p>
 </form> 
 

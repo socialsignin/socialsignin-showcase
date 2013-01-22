@@ -12,9 +12,11 @@
 		<org.socialsignin.twitter.version>1.0.2-SNAPSHOT</org.socialsignin.twitter.version>
 		<org.socialsignin.lastfm.version>1.0.2-SNAPSHOT</org.socialsignin.lastfm.version>
 		<org.socialsignin.mixcloud.version>1.0.2-SNAPSHOT</org.socialsignin.mixcloud.version>
+		<org.socialsignin.cloudplaylists.version>1.0.2-SNAPSHOT</org.socialsignin.cloudplaylists.version>
 		<org.socialsignin.soundcloud.version>1.0.2-SNAPSHOT</org.socialsignin.soundcloud.version>
 		<org.socialsignin.linkedin.version>1.0.2-SNAPSHOT</org.socialsignin.linkedin.version>
-		<org.socialsignin.springsocial.security.version>1.0.2.RELEASE</org.socialsignin.springsocial.security.version>
+		<org.socialsignin.exfm.version>1.0.2-SNAPSHOT</org.socialsignin.exfm.version>
+		<org.socialsignin.springsocial.security.version>1.0.4-SNAPSHOT</org.socialsignin.springsocial.security.version>
 		<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
 		<org.springframework.social.version>1.0.2.RELEASE</org.springframework.social.version>
 		<org.springframework.security.version>3.1.2.RELEASE</org.springframework.security.version>
@@ -79,7 +81,12 @@
 			<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-linkedin</artifactId>
 			<version>${org.socialsignin.linkedin.version}</version>
-		</dependency>	
+		</dependency>
+			<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-exfm</artifactId>
+			<version>${org.socialsignin.exfm.version}</version>
+		</dependency>		
 		<dependency>
 			<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-twitter</artifactId>
@@ -99,6 +106,11 @@
 			<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-soundcloud</artifactId>
 			<version>${org.socialsignin.soundcloud.version}</version>
+		</dependency>
+				<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-cloudplaylists</artifactId>
+			<version>${org.socialsignin.cloudplaylists.version}</version>
 		</dependency>
 			<dependency>
 			<groupId>org.springframework.social</groupId>

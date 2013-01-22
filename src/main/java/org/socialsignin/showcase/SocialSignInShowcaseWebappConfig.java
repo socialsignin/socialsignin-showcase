@@ -39,7 +39,8 @@ public class SocialSignInShowcaseWebappConfig {
 		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
 		Properties mappings = new Properties();
 		mappings.put("org.socialsignin.springframework.social.security.signin.NonUniqueConnectionException", "connect/providerConnect");
-
+		mappings.put("org.springframework.social.ExpiredAuthorizationException", "connect/providerConnect");
+		mappings.put("org.springframework.social.connect.NotConnectedException", "connect/providerConnect");
 		resolver.setDefaultErrorView("exception");
 		
 		resolver.setExceptionMappings(mappings);

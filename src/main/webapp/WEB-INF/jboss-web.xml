@@ -1,0 +1,4 @@
+<jboss-web>
+<context-root>/</context-root>
+<virtual-host>socialsignin.org</virtual-host>
+</jboss-web>

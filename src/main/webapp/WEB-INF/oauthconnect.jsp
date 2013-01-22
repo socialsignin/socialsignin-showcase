@@ -10,7 +10,7 @@
 </c:if>
 
 
-<p>Please connect your local account with 
+<h2>Please connect your SocialSignin Showcase account with 
 <c:choose>
 <c:when test="${not empty provider}">
 <c:out value="${provider}" />
@@ -19,7 +19,7 @@
 another third party provider
 </c:otherwise>
 </c:choose>
-</p>
+</h2>
 
 
 <c:forEach var="entry"
@@ -30,7 +30,7 @@ another third party provider
 
 <authz:authorize access="!hasRole('${entry.value}')">
 
-  <form class="login" action="http://localhost:8080/connect/<c:out value="${entry.key}" />" method="POST">
+  <form class="login" action="/connect/<c:out value="${entry.key}" />" method="POST">
 	<p><input type="submit" value="Connect with <c:out value="${entry.key}" />" /></p>
 </form> 
 </authz:authorize>

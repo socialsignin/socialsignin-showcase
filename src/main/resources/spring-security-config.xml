@@ -45,23 +45,23 @@
 
 	<security:http use-expressions="true"
 		entry-point-ref="customSpringSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
-		<intercept-url pattern="/protected/twitter" access="hasRole('ROLE_USER') and hasRole('ROLE_USER_TWITTER')" />
-		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/tweets" access="hasRole('ROLE_USER') and hasRole('ROLE_USER_TWITTER')" />
+		<intercept-url pattern="/exfmLovedSongs" access="hasRole('ROLE_USER') and hasRole('ROLE_USER_EXFM')" />
+		<intercept-url pattern="/cloudPlaylists" access="hasRole('ROLE_USER') and hasRole('ROLE_USER_CLOUDPLAYLISTS')" />
+		<intercept-url pattern="/soundCloudFavorites" access="hasRole('ROLE_USER') and hasRole('ROLE_USER_SOUNDCLOUD')" />
+		<intercept-url pattern="/lastFmLovedTracks" access="hasRole('ROLE_USER') and hasRole('ROLE_USER_LASTFM')" />
+		<intercept-url pattern="/accessTokens" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/profileUrls" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/connectWithProvider" access="hasRole('ROLE_USER')" />
-
-
 		<security:logout logout-url="/logout" />
-		
 		<access-denied-handler ref="springSocialSecurityAccessDeniedHandler"/>
 		
-
 		<anonymous />
 		<security:custom-filter position="FORM_LOGIN_FILTER"
 			ref="springSocialSecurityAuthenticationFilter" />
 
 		<remember-me services-ref="springSocialSecurityRememberMeServices"
 			key="springSocialSecurity" />
-
 
 	</security:http>
 

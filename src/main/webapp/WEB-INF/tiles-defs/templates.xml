@@ -24,17 +24,38 @@
 		<put-attribute name="body" value="/WEB-INF/exception.jsp" />
 	</definition>
 
-	<definition name="publicPage.layout" extends=".mainTemplateWithHeader">
-		<put-attribute name="securityLevel" value="Public" type="string"
-			cascade="true" />
-		<put-attribute name="body" value="/WEB-INF/helloWorld.jsp" />
+	<definition name="index.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/index.jsp" />
 	</definition>
-
-	<definition name="protectedPage.layout" extends=".mainTemplateWithHeader">
-		<put-attribute name="securityLevel" value="Protected"
-			type="string" cascade="true" />
-		<put-attribute name="body" value="/WEB-INF/helloWorld.jsp" />
+	<definition name="accessTokens.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/accessTokens.jsp" />
 	</definition>
+	
+		<definition name="profileUrls.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/profileUrls.jsp" />
+	</definition>
+	
+		<definition name="tweets.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/tweets.jsp" />
+	</definition>
+		<definition name="songs.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/songs.jsp" />
+	</definition>
+	
+		<definition name="cloudplaylists.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/cloudplaylists.jsp" />
+	</definition>
+	
+	<definition name="soundCloudFavorites.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/soundCloudFavorites.jsp" />
+	</definition>
+	
+	
+		<definition name="lastFmLovedTracks.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="body" value="/WEB-INF/lastFmLovedTracks.jsp" />
+	</definition>
+	
+	
 	<definition name="oauthlogin.layout" extends=".mainTemplate">
 		<put-attribute name="body" value="/WEB-INF/oauthlogin.jsp" />
 	</definition>
@@ -117,6 +138,17 @@
 			cascade="true" />
 		<put-attribute name="body" value="/WEB-INF/oauthconnect.jsp" />
 	</definition>
+	
+	<definition name="connect/cloudplaylistsConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="CloudPlaylists"
+			type="string" cascade="true " />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+	<definition name="connect/cloudplaylistsConnect.layout" extends=".mainTemplateWithHeader">
+			<put-attribute name="provider" value="cloudplaylists" type="string"  
+			cascade="true" />
+		<put-attribute name="body" value="/WEB-INF/oauthconnect.jsp" />
+	</definition>
 
 
 	<definition name="connect/linkedinConnected.layout" extends=".mainTemplateWithHeader">
@@ -127,6 +159,18 @@
 
 	<definition name="connect/linkedinConnect.layout" extends=".mainTemplateWithHeader">
 		<put-attribute name="provider" value="linkedin" type="string"  
+			cascade="true" />
+		<put-attribute name="body" value="/WEB-INF/oauthconnect.jsp" />
+	</definition>
+	
+		<definition name="connect/exfmConnected.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="providerName" value="ExFm"
+			type="string" cascade="true " />
+		<put-attribute name="body" value="/WEB-INF/providerConnected.jsp" />
+	</definition>
+
+	<definition name="connect/exfmConnect.layout" extends=".mainTemplateWithHeader">
+		<put-attribute name="provider" value="exfm" type="string"  
 			cascade="true" />
 		<put-attribute name="body" value="/WEB-INF/oauthconnect.jsp" />
 	</definition>
