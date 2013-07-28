@@ -24,7 +24,6 @@ import org.socialsignin.provider.cloudplaylists.CloudPlaylistsProviderService;
 import org.socialsignin.provider.exfm.ExFmProviderService;
 import org.socialsignin.provider.facebook.FacebookProviderService;
 import org.socialsignin.provider.lastfm.LastFmProviderService;
-import org.socialsignin.provider.linkedin.LinkedInProviderService;
 import org.socialsignin.provider.mixcloud.MixcloudProviderService;
 import org.socialsignin.provider.soundcloud.SoundCloudProviderService;
 import org.socialsignin.provider.twitter.TwitterProviderService;
@@ -38,7 +37,6 @@ import org.springframework.social.exfm.api.ExFm;
 import org.springframework.social.exfm.api.Song;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.lastfm.api.LastFm;
-import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.mixcloud.api.Mixcloud;
 import org.springframework.social.soundcloud.api.SoundCloud;
 import org.springframework.social.soundcloud.api.Track;
@@ -70,9 +68,6 @@ public class SocialSignInShowcaseController {
 	
 	@Autowired
 	private SoundCloudProviderService soundCloudProviderService;
-	
-	@Autowired
-	private LinkedInProviderService linkedInProviderService;
 	
 	@Autowired
 	private CloudPlaylistsProviderService cloudPlaylistsProviderService;
@@ -107,7 +102,7 @@ public class SocialSignInShowcaseController {
 		model.put("tweets", tweets);
 		return "tweets";
 	}
-	
+
 	@RequestMapping("/exfmLovedSongs")
 	public String exfmLovedSongs(Map model) {
 		
@@ -117,7 +112,9 @@ public class SocialSignInShowcaseController {
 		model.put("songs", songs);
 		return "songs";
 	}
+
 	
+
 	@RequestMapping("/soundCloudFavorites")
 	public String soundCloudFavorites(Map model) {
 		
@@ -126,7 +123,8 @@ public class SocialSignInShowcaseController {
 		model.put("soundCloudFavorites", soundCloudFavorites);
 		return "soundCloudFavorites";
 	}
-	
+
+
 	@RequestMapping("/lastFmLovedTracks")
 	public String lastFmLovedTracks(Map model) {
 		
@@ -136,6 +134,7 @@ public class SocialSignInShowcaseController {
 		model.put("lastFmLovedTracks", lastFmLovedTracks);
 		return "lastFmLovedTracks";
 	}
+
 	
 	@RequestMapping("/cloudPlaylists")
 	public String cloudPlaylists(Map model) {
@@ -145,7 +144,7 @@ public class SocialSignInShowcaseController {
 		model.put("playlistDescriptors", playlistDescriptors);
 		return "cloudplaylists";
 	}
-	
+
 	@RequestMapping("/accessTokens")
 	public String accessTokens(Map model) {
 
@@ -168,18 +167,20 @@ public class SocialSignInShowcaseController {
 	public String profileUrls(Map model) {
 
 		List<String> profileUrls = new ArrayList<String>();
-		
+
 		LastFm lastFm = lastFmProviderService.getAuthenticatedApi();
 		if (lastFm != null)
 		{
 			profileUrls.add(lastFm.userOperations().getUserProfile().getUrl());
 		}
+
 		
 		Facebook facebook = facebookProviderService.getAuthenticatedApi();
 		if (facebook != null)
 		{
 			profileUrls.add(facebook.userOperations().getUserProfile().getLink());	
 		}
+	
 		
 		Twitter twitter = twitterProviderService.getAuthenticatedApi();
 		if (twitter != null)
@@ -187,6 +188,7 @@ public class SocialSignInShowcaseController {
 			profileUrls.add(twitter.userOperations().getUserProfile().getProfileUrl());
 		}
 		
+
 		Mixcloud mixcloud = mixcloudProviderService.getAuthenticatedApi();
 		if (mixcloud != null)
 		{
@@ -198,12 +200,8 @@ public class SocialSignInShowcaseController {
 		{
 			profileUrls.add(soundCloud.meOperations().getUserProfile().getPermalinkUrl());
 		}
-		
-		LinkedIn linkedIn = linkedInProviderService.getAuthenticatedApi();
-		if (linkedIn != null)
-		{
-			profileUrls.add(linkedIn.profileOperations().getProfileUrl());
-		}
+	
+	
 		
 		CloudPlaylists cloudPlaylists = cloudPlaylistsProviderService.getAuthenticatedApi();
 		if (cloudPlaylists != null)

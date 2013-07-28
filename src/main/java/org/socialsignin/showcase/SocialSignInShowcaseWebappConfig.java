@@ -19,17 +19,39 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.socialsignin.springsocial.security.config.annotation.EnableSpringSocialSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.UserIdSource;
+import org.springframework.social.cloudplaylists.config.annotation.EnableCloudPlaylists;
+import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
+import org.springframework.social.exfm.config.annotation.EnableExFm;
+import org.springframework.social.facebook.config.annotation.EnableFacebook;
+import org.springframework.social.lastfm.config.annotation.EnableLastFm;
+import org.springframework.social.mixcloud.config.annotation.EnableMixcloud;
+import org.springframework.social.soundcloud.config.annotation.EnableSoundCloud;
+import org.springframework.social.twitter.config.annotation.EnableTwitter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
-import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
+//Swap in the below annotation instead of no-arg version if implicit sign up is required
+//@EnableJdbcConnectionRepository(connectionSignUpRef="springSocialSecurityConnectionSignUp")
+@EnableJdbcConnectionRepository
+@EnableSpringSocialSecurity
+@EnableSoundCloud(appId = "${soundcloud.consumerKey}", appSecret = "${soundcloud.consumerSecret}", redirectUri="${soundcloud.redirectUri}")
+@EnableTwitter(appId = "${twitter.consumerKey}", appSecret = "${twitter.consumerSecret}")
+@EnableLastFm(appId = "${lastfm.consumerKey}", appSecret = "${lastfm.consumerSecret}")
+@EnableExFm(appId = "${exfm.consumerKey}", appSecret = "${exfm.consumerSecret}", oauthApiBaseUrl = "${exfm.oauthApiBaseUrl}", oauthAuthorizeUrl = "${exfm.oauthAuthorizeUrl}", oauthTokenUrl = "${exfm.oauthTokenUrl}")
+@EnableFacebook(appId = "${facebook.clientId}", appSecret = "${facebook.clientSecret}")
+@EnableCloudPlaylists(appId = "${cloudplaylists.consumerKey}", appSecret = "${cloudplaylists.consumerSecret}")
+@EnableMixcloud(appId = "${mixcloud.consumerKey}", appSecret = "${mixcloud.consumerSecret}")
 public class SocialSignInShowcaseWebappConfig {
 
 	
@@ -59,23 +81,31 @@ public class SocialSignInShowcaseWebappConfig {
 
 	
 	@Bean
-	public ConnectionFactoryRegistry connectionFactoryRegistry() {
-		return new ConnectionFactoryRegistry();
+	public UserIdSource userIdSource() {
+		return new UserIdSource() {			
+			@Override
+			public String getUserId() {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				if (authentication == null) {
+					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
+				}
+				return authentication.getName();
+			}
+		};
 	}
 
-
 	@Bean
-	public DefaultAnnotationHandlerMapping handlerMapping() throws Exception {
+	public RequestMappingHandlerMapping handlerMapping() throws Exception {
 
-		DefaultAnnotationHandlerMapping mapping = new DefaultAnnotationHandlerMapping();
+		RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
 		return mapping;
 	}
 	
 
 	@Bean
-	public AnnotationMethodHandlerAdapter handlerAdapter() throws Exception {
+	public RequestMappingHandlerAdapter handlerAdapter() throws Exception {
 
-		AnnotationMethodHandlerAdapter mapping = new AnnotationMethodHandlerAdapter();
+		RequestMappingHandlerAdapter mapping = new RequestMappingHandlerAdapter();
 
 		return mapping;
 

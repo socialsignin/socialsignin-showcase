@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.socialsignin.springsocial.security.connect.SpringSocialSecurityConnectionFactory;
+import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class AuthenticationDetailViewPreparer implements ViewPreparer {
 
 	@Autowired
-	private ConnectionFactoryRegistry connectionFactoryRegistry;
+	private ConnectionFactoryLocator connectionFactoryLocator;
 	
 	private String getAuthenticatedUserName() {
 		Authentication authentication = SecurityContextHolder.getContext()
@@ -29,8 +30,7 @@ public class AuthenticationDetailViewPreparer implements ViewPreparer {
 	
 	private Map<String, String> getRegisteredProviderRoleNamesByProviderName() {
 		Map<String, String> registeredProviderRoleNamesByProviderName = new HashMap<String, String>();
-		for (String registeredProviderId : connectionFactoryRegistry
-				.registeredProviderIds()) {
+		for (String registeredProviderId : connectionFactoryLocator.registeredProviderIds()) {
 			if (!registeredProviderId.equals(SpringSocialSecurityConnectionFactory.SPRING_SOCIAL_SECURITY_PROVIDER_NAME))
 			{
 				registeredProviderRoleNamesByProviderName.put(registeredProviderId,
