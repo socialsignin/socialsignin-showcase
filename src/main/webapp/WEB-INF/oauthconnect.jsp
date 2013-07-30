@@ -7,6 +7,7 @@
 
 <c:if test="${not empty exception}">
 <p><c:out value="${exception.message}" /></p>
+
 </c:if>
 
 
@@ -34,6 +35,13 @@ another third party provider
 	<p><input type="submit" value="Connect with <c:out value="${entry.key}" />" /></p>
 </form> 
 </authz:authorize>
+<authz:authorize access="hasRole('${entry.value}')">
+<c:if test="${not empty provider and provider eq entry.key}">
+Please logout and login again with <c:out value="${provider}" /> to reconnect
+</c:if>
+
+</authz:authorize>
+
 
 </c:if>
 

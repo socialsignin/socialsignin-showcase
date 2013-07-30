@@ -17,6 +17,7 @@ package org.socialsignin.showcase;
 
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.socialsignin.springsocial.security.config.annotation.EnableSpringSocialSecurity;
@@ -26,6 +27,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.ApiException;
 import org.springframework.social.UserIdSource;
 import org.springframework.social.cloudplaylists.config.annotation.EnableCloudPlaylists;
 import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
@@ -36,6 +38,7 @@ import org.springframework.social.mixcloud.config.annotation.EnableMixcloud;
 import org.springframework.social.soundcloud.config.annotation.EnableSoundCloud;
 import org.springframework.social.twitter.config.annotation.EnableTwitter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -58,7 +61,32 @@ public class SocialSignInShowcaseWebappConfig {
 	@Bean
 	public HandlerExceptionResolver defaultHandlerExceptionResolver()
 	{
-		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver()
+		{
+
+			@Override
+			protected ModelAndView getModelAndView(String viewName,
+					Exception ex, HttpServletRequest request) {
+				return addProviderToModelIfAvailable(super.getModelAndView(viewName, ex,request),ex);
+			}
+
+			@Override
+			protected ModelAndView getModelAndView(String viewName, Exception ex) {
+				return addProviderToModelIfAvailable(super.getModelAndView(viewName, ex),ex);
+			}
+			
+			private ModelAndView addProviderToModelIfAvailable(ModelAndView mav,Exception ex)
+			{
+				if (ex instanceof ApiException)
+				{
+					mav.addObject("provider", ((ApiException)ex).getProviderId());
+				}
+				return mav;
+			}
+			
+			
+			
+		};
 		Properties mappings = new Properties();
 		mappings.put("org.socialsignin.springframework.social.security.signin.NonUniqueConnectionException", "connect/providerConnect");
 		mappings.put("org.springframework.social.ExpiredAuthorizationException", "connect/providerConnect");
