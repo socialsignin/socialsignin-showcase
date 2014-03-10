@@ -17,8 +17,8 @@
 		<org.socialsignin.soundcloud.version>1.1.0-SNAPSHOT</org.socialsignin.soundcloud.version>
 		<org.socialsignin.exfm.version>1.1.0-SNAPSHOT</org.socialsignin.exfm.version>
 		<org.socialsignin.springsocial.security.version>1.1.0-SNAPSHOT</org.socialsignin.springsocial.security.version>
-		<org.springframework.version>3.2.3.RELEASE</org.springframework.version>
-		<org.springframework.social.version>1.1.0.M3</org.springframework.social.version>
+		<org.springframework.version>4.0.2.RELEASE</org.springframework.version>
+		<org.springframework.social.version>1.1.0.RC1</org.springframework.social.version>
 		<org.springframework.security.version>3.2.0.M2</org.springframework.security.version>
 		<org.apache.tiles.version>2.2.2</org.apache.tiles.version>
 	    <org.springframework.webflow.version>2.3.0.RELEASE</org.springframework.webflow.version>
@@ -36,7 +36,15 @@
             <id>spring-maven-milestone</id>
             <name>Spring Maven Milestone Repository</name>
             <url>http://maven.springframework.org/milestone</url>
-        </repository>	
+        </repository>
+         <repository>
+        <id>spring-snapshots</id>
+        <name>Spring Snapshots</name>
+        <url>http://repo.spring.io/snapshot</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>	
 	</repositories>
 	<dependencies>
 	<dependency>
@@ -45,11 +53,11 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 	</dependency>
-	<dependency>
-		<groupId>hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.1 </version>
-		</dependency>
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+	<version>1.3.175</version>
+</dependency>
 		<!--  added for tiles implementation -->
 			<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -94,30 +102,41 @@
 			<version>${org.socialsignin.soundcloud.version}</version>
 		</dependency>
 			<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>socialsignin-soundcloud</artifactId>
+			<version>${org.socialsignin.soundcloud.version}</version>
+		</dependency>
+
+			<dependency>
 		<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-lastfm</artifactId>
 			<version>${org.socialsignin.lastfm.version}</version>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-exfm</artifactId>
 			<version>${org.socialsignin.exfm.version}</version>
 		</dependency>	
+
+	
 		<dependency>
 			<groupId>org.socialsignin</groupId>
 			<artifactId>socialsignin-facebook</artifactId>
 			<version>${org.socialsignin.facebook.version}</version>
 		</dependency>
-		<dependency>
+
+	<dependency> 
+		<groupId>org.socialsignin</groupId> 
+		<artifactId>socialsignin-mixcloud</artifactId> 
+			<version>${org.socialsignin.mixcloud.version}</version> 
+		</dependency> 
+		<dependency> 
 			<groupId>org.socialsignin</groupId>
-			<artifactId>socialsignin-mixcloud</artifactId>
-			<version>${org.socialsignin.mixcloud.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.socialsignin</groupId>
-			<artifactId>socialsignin-cloudplaylists</artifactId>
-			<version>${org.socialsignin.cloudplaylists.version}</version>
-		</dependency>	
+			<artifactId>socialsignin-cloudplaylists</artifactId> 
+			<version>${org.socialsignin.cloudplaylists.version}</version> 
+		</dependency>	 
 
 		<dependency>
 			<groupId>org.socialsignin</groupId>

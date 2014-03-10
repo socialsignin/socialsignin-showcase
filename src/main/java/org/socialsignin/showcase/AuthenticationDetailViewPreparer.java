@@ -7,12 +7,11 @@ import org.apache.tiles.Attribute;
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.context.TilesRequestContext;
 import org.apache.tiles.preparer.ViewPreparer;
+import org.socialsignin.springsocial.security.connect.SpringSocialSecurityConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.socialsignin.springsocial.security.connect.SpringSocialSecurityConnectionFactory;
 import org.springframework.social.connect.ConnectionFactoryLocator;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.stereotype.Component;
 
 @Component

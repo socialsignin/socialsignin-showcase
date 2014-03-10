@@ -200,7 +200,8 @@ public class SocialSignInShowcaseController {
 		{
 			profileUrls.add(soundCloud.meOperations().getUserProfile().getPermalinkUrl());
 		}
-	
+		
+		
 	
 		
 		CloudPlaylists cloudPlaylists = cloudPlaylistsProviderService.getAuthenticatedApi();

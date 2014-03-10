@@ -13,30 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.socialsignin.showcase;
+package org.socialsignin.showcase.config;
 
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
-import org.socialsignin.springsocial.security.config.annotation.EnableSpringSocialSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.ApiException;
-import org.springframework.social.UserIdSource;
-import org.springframework.social.cloudplaylists.config.annotation.EnableCloudPlaylists;
-import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
-import org.springframework.social.exfm.config.annotation.EnableExFm;
-import org.springframework.social.facebook.config.annotation.EnableFacebook;
-import org.springframework.social.lastfm.config.annotation.EnableLastFm;
-import org.springframework.social.mixcloud.config.annotation.EnableMixcloud;
-import org.springframework.social.soundcloud.config.annotation.EnableSoundCloud;
-import org.springframework.social.twitter.config.annotation.EnableTwitter;
+import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
@@ -44,18 +33,22 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
+@EnableSocial
 //Swap in the below annotation instead of no-arg version if implicit sign up is required
 //@EnableJdbcConnectionRepository(connectionSignUpRef="springSocialSecurityConnectionSignUp")
-@EnableJdbcConnectionRepository
-@EnableSpringSocialSecurity
-@EnableSoundCloud(appId = "${soundcloud.consumerKey}", appSecret = "${soundcloud.consumerSecret}", redirectUri="${soundcloud.redirectUri}")
-@EnableTwitter(appId = "${twitter.consumerKey}", appSecret = "${twitter.consumerSecret}")
-@EnableLastFm(appId = "${lastfm.consumerKey}", appSecret = "${lastfm.consumerSecret}")
-@EnableExFm(appId = "${exfm.consumerKey}", appSecret = "${exfm.consumerSecret}", oauthApiBaseUrl = "${exfm.oauthApiBaseUrl}", oauthAuthorizeUrl = "${exfm.oauthAuthorizeUrl}", oauthTokenUrl = "${exfm.oauthTokenUrl}")
-@EnableFacebook(appId = "${facebook.clientId}", appSecret = "${facebook.clientSecret}")
-@EnableCloudPlaylists(appId = "${cloudplaylists.consumerKey}", appSecret = "${cloudplaylists.consumerSecret}")
-@EnableMixcloud(appId = "${mixcloud.consumerKey}", appSecret = "${mixcloud.consumerSecret}")
+//@EnableJdbcConnectionRepository
+//@EnableSpringSocialSecurity
+//@EnableSoundCloud(appId = "${soundcloud.consumerKey}", appSecret = "${soundcloud.consumerSecret}", redirectUri="${soundcloud.redirectUri}")
+//@EnableTwitter(appId = "${twitter.consumerKey}", appSecret = "${twitter.consumerSecret}")
+//@EnableLastFm(appId = "${lastfm.consumerKey}", appSecret = "${lastfm.consumerSecret}")
+//@EnableExFm(appId = "${exfm.consumerKey}", appSecret = "${exfm.consumerSecret}", oauthApiBaseUrl = "${exfm.oauthApiBaseUrl}", oauthAuthorizeUrl = "${exfm.oauthAuthorizeUrl}", oauthTokenUrl = "${exfm.oauthTokenUrl}")
+//@EnableFacebook(appId = "${facebook.clientId}", appSecret = "${facebook.clientSecret}")
+//@EnableCloudPlaylists(appId = "${cloudplaylists.consumerKey}", appSecret = "${cloudplaylists.consumerSecret}")
+//@EnableMixcloud(appId = "${mixcloud.consumerKey}", appSecret = "${mixcloud.consumerSecret}")
 public class SocialSignInShowcaseWebappConfig {
+
+	
+	
 
 	
 	@Bean
@@ -102,25 +95,13 @@ public class SocialSignInShowcaseWebappConfig {
 	@Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-            .setType(EmbeddedDatabaseType.HSQL)
+            .setType(EmbeddedDatabaseType.H2)
             .addScript("classpath:org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql")
             .build();
     }
 
 	
-	@Bean
-	public UserIdSource userIdSource() {
-		return new UserIdSource() {			
-			@Override
-			public String getUserId() {
-				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-				if (authentication == null) {
-					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
-				}
-				return authentication.getName();
-			}
-		};
-	}
+
 
 	@Bean
 	public RequestMappingHandlerMapping handlerMapping() throws Exception {

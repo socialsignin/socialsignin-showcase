@@ -26,6 +26,10 @@
 	<!-- Scan for our config class and demo controller -->
 
 	<context:component-scan
+		base-package="org.socialsignin.showcase.config.social" />
+	
+
+	<context:component-scan
 		base-package="org.socialsignin.showcase" />
 	
 	<!-- Start Spring Social Security -->
